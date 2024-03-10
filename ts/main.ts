@@ -1,3 +1,14 @@
+interface ISettings {
+  gap?: number;
+  colWidth?: number;
+  columns?: number;
+  breakpoints?: {
+    [key: string]: {
+      columns: number;
+      gap: number;
+    };
+  };
+}
 class a3Gallery {
   // Attributes
   a3GalleryId: string;
@@ -5,30 +16,30 @@ class a3Gallery {
     gap?: number;
     colWidth?: number;
     columns?: number;
-  };
-  breakpoints?: {
-    "480": {
-      columns: 3;
-      gap: 5;
-    };
-  };
-  // Constructor
-  constructor(
-    a3GalleryId: string,
-    settings: { gap?: number; colWidth?: number; columns?: number } = {},
-    breakpoints: {
-      string: {
+    breakpoints?: {
+      [key: string]: {
         columns: number;
         gap: number;
       };
-    }
-  ) {
+    };
+  };
+  // Constructor
+  constructor(a3GalleryId: string, settings: ISettings) {
     this.a3GalleryId = a3GalleryId;
     this.settings = settings;
-    console.log(this.breakpoints);
   }
   // Method
   a3GalleryFN(): void {
+    // Responsive gallery
+    const breakpoints = this.settings?.breakpoints;
+    for (const key in breakpoints) {
+      let mediaQuery = window.matchMedia(`max-width:${key}`);
+      function handleMediaChange(mediaQuery: MediaQueryListEvent) {
+        if (mediaQuery.matches) {
+          console.log(key);
+        }
+      }
+    }
     // HTMLElement a3 Gallery Container
     const a3GalleryContainer = document.querySelector(
       `#${this.a3GalleryId}`
