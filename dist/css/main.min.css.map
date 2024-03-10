@@ -1,0 +1,1 @@
+{"version":3,"sources":["_base.scss"],"names":[],"mappings":"AAAA,EACC,QAAA,EACA,OAAA,EACA,WAAA,WAED,YACC,OAAA,IAAA,MAAA,IACA,QAAA","file":"main.min.css","sourcesContent":["*{\n\tpadding: 0;\n\tmargin: 0;\n\tbox-sizing: border-box;\n}\n.a3-gallery {\n\tborder: 1px solid red;\n\tpadding: 10px;\n}"]}
