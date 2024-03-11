@@ -65,7 +65,7 @@ function js() {
 			presets: ['@babel/env']
 		}))
 		.pipe(uglify())
-		.pipe(concat('main.min.js'))
+		.pipe(concat('asrooor.min.js'))
 		.pipe(sourceMap.write('.'))
 		.pipe(size({
 			showFiles: true
