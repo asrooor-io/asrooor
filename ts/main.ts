@@ -3,7 +3,7 @@ interface ISettings {
   colWidth?: number;
   columns?: number;
   breakpoints?: {
-    [key: string]: {
+    [key: number]: {
       columns: number;
       gap: number;
     };
@@ -17,7 +17,7 @@ class a3Gallery {
     colWidth?: number;
     columns?: number;
     breakpoints?: {
-      [key: string]: {
+      [key: number]: {
         columns: number;
         gap: number;
       };
@@ -30,16 +30,6 @@ class a3Gallery {
   }
   // Method
   a3GalleryFN(): void {
-    // Responsive gallery
-    const breakpoints = this.settings?.breakpoints;
-    for (const key in breakpoints) {
-      let mediaQuery = window.matchMedia(`max-width:${key}`);
-      function handleMediaChange(mediaQuery: MediaQueryListEvent) {
-        if (mediaQuery.matches) {
-          console.log(key);
-        }
-      }
-    }
     // HTMLElement a3 Gallery Container
     const a3GalleryContainer = document.querySelector(
       `#${this.a3GalleryId}`
@@ -78,6 +68,23 @@ class a3Gallery {
       });
     } else {
       a3GalleryContainer.style.gap = "0px";
+    }
+    // Responsive gallery
+    interface IPoin {
+      breakpoints?: {
+        [key: number]: {
+          columns: number;
+          gap: number;
+        };
+      };
+    }
+    const breakpoints = this.settings?.breakpoints;
+
+    const screenWidth: number = window.innerWidth;
+    for (const key in breakpoints) {
+      if (Object.prototype.hasOwnProperty.call(breakpoints, key)) {
+        const obj = breakpoints[key as unknown as number]; // Get the object corresponding to the key
+      }
     }
   }
 }

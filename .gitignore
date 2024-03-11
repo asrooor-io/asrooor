@@ -1,4 +1,5 @@
 node_modules
-package-lock
-package
-gulpfile
+package-lock.json
+package.json
+gulpfile.js
+tsconfig.json
