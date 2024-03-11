@@ -76,17 +76,17 @@
 		const homePageGallery = new a3Gallery('a3Gallery', {
 			columns: 5,
 			gap: 10,
-			colWidth: 200,
+			colWidth: 0,
 			breakpoints: {
 				500: {
-					colWidth: 50,
-					columns: 6,
-					gap: 1
-				},
-				400: {
 					colWidth: 0,
+					columns: 0,
+					gap: 0
+				},
+				200: {
+					colWidth: 10,
 					columns: 3,
-					gap: 5,
+					gap: 10
 				},
 			}
 		}).a3GalleryFN();
