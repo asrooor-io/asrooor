@@ -51,7 +51,7 @@ class a3Gallery {
         const screenWidth = window.innerWidth;
         for (const key in breakpoints) {
             let point = parseInt(key);
-            if (screenWidth > Number(key)) {
+            if (screenWidth <= Number(key)) {
                 // responsive functionality
                 if (breakpoints[point].colWidth) {
                     a3GalleryContainer.style.columnWidth = `${breakpoints[point].colWidth}px`;
