@@ -9,7 +9,6 @@
 </head>
 
 <body>
-	<div class="test-block"></div>
 	<div id="a3Gallery">
 		<div class="a3-gallery__item">
 			<img src="https://picsum.photos/200/300?random=1" alt="Rasm 1" class="a3-gallery__img">
@@ -77,12 +76,17 @@
 		const homePageGallery = new a3Gallery('a3Gallery', {
 			columns: 5,
 			gap: 10,
+			colWidth: 200,
 			breakpoints: {
-				450: {
-					gap: 40
+				500: {
+					colWidth: 50,
+					columns: 6,
+					gap: 1
 				},
-				768: {
-					gap: 100
+				400: {
+					colWidth: 0,
+					columns: 3,
+					gap: 5,
 				},
 			}
 		}).a3GalleryFN();

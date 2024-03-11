@@ -1,9 +1,10 @@
 interface ISettings {
-  gap?: number;
-  colWidth?: number;
-  columns?: number;
-  breakpoints?: {
+  gap: number;
+  colWidth: number;
+  columns: number;
+  breakpoints: {
     [key: number]: {
+      colWidth: number;
       columns: number;
       gap: number;
     };
@@ -13,11 +14,12 @@ class a3Gallery {
   // Attributes
   a3GalleryId: string;
   settings?: {
-    gap?: number;
-    colWidth?: number;
-    columns?: number;
+    gap: number;
+    colWidth: number;
+    columns: number;
     breakpoints?: {
       [key: number]: {
+        colWidth: number;
         columns: number;
         gap: number;
       };
@@ -53,6 +55,8 @@ class a3Gallery {
     // settings style columns
     if (this.settings?.columns) {
       a3GalleryContainer.style.columnCount = `${this.settings.columns}`;
+    } else {
+      a3GalleryContainer.style.columnCount = "4";
     }
     // settings style column width
     if (this.settings?.colWidth) {
@@ -73,17 +77,48 @@ class a3Gallery {
     interface IPoin {
       breakpoints?: {
         [key: number]: {
+          colWidth: number;
           columns: number;
           gap: number;
         };
       };
     }
     const breakpoints = this.settings?.breakpoints;
-
     const screenWidth: number = window.innerWidth;
+
     for (const key in breakpoints) {
-      if (Object.prototype.hasOwnProperty.call(breakpoints, key)) {
-        const obj = breakpoints[key as unknown as number]; // Get the object corresponding to the key
+      let point = parseInt(key);
+      if (screenWidth <= point) {
+        a3GalleryContainer.style.gap = `${breakpoints[point].gap}px`;
+        a3GalleryContainer.style.columnCount = `${breakpoints[point].columns}`;
+        a3GalleryContainer.style.columnWidth = `${breakpoints[point].colWidth}px`;
+        // responsive functionality
+        responsiveFN(breakpoints[point]);
+      }
+    }
+    interface Ireponsive {
+      colWidth: number;
+      columns: number;
+      gap: number;
+    }
+    function responsiveFN(breakpoint: Ireponsive): void {
+      if (breakpoint.colWidth) {
+        a3GalleryContainer.style.columnWidth = `${breakpoint.colWidth}px`;
+      } else if (breakpoint.colWidth === 0) {
+        a3GalleryContainer.style.columnWidth = "0px";
+      }
+      if (breakpoint.columns) {
+        a3GalleryContainer.style.columnCount = `${breakpoint.columns}`;
+      }
+      if (breakpoint.gap) {
+        a3GalleryContainer.style.gap = `${breakpoint.gap}px`;
+        a3GalleryItems.forEach((item: HTMLElement) => {
+          item.style.marginBottom = `${breakpoint.gap}px`;
+        });
+      } else if (breakpoint.gap == 0) {
+        a3GalleryItems.forEach((item: HTMLElement) => {
+          item.style.marginBottom = "0px";
+        });
       }
     }
   }

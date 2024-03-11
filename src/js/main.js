@@ -26,6 +26,9 @@ class a3Gallery {
         if ((_a = this.settings) === null || _a === void 0 ? void 0 : _a.columns) {
             a3GalleryContainer.style.columnCount = `${this.settings.columns}`;
         }
+        else {
+            a3GalleryContainer.style.columnCount = "4";
+        }
         // settings style column width
         if ((_b = this.settings) === null || _b === void 0 ? void 0 : _b.colWidth) {
             a3GalleryContainer.style.columnWidth = `${this.settings.colWidth}px`;
@@ -47,8 +50,35 @@ class a3Gallery {
         const breakpoints = (_d = this.settings) === null || _d === void 0 ? void 0 : _d.breakpoints;
         const screenWidth = window.innerWidth;
         for (const key in breakpoints) {
-            if (Object.prototype.hasOwnProperty.call(breakpoints, key)) {
-                const obj = breakpoints[key]; // Get the object corresponding to the key
+            let point = parseInt(key);
+            if (screenWidth <= point) {
+                a3GalleryContainer.style.gap = `${breakpoints[point].gap}px`;
+                a3GalleryContainer.style.columnCount = `${breakpoints[point].columns}`;
+                a3GalleryContainer.style.columnWidth = `${breakpoints[point].colWidth}px`;
+                // responsive functionality
+                responsiveFN(breakpoints[point]);
+            }
+        }
+        function responsiveFN(breakpoint) {
+            if (breakpoint.colWidth) {
+                a3GalleryContainer.style.columnWidth = `${breakpoint.colWidth}px`;
+            }
+            else if (breakpoint.colWidth === 0) {
+                a3GalleryContainer.style.columnWidth = "0px";
+            }
+            if (breakpoint.columns) {
+                a3GalleryContainer.style.columnCount = `${breakpoint.columns}`;
+            }
+            if (breakpoint.gap) {
+                a3GalleryContainer.style.gap = `${breakpoint.gap}px`;
+                a3GalleryItems.forEach((item) => {
+                    item.style.marginBottom = `${breakpoint.gap}px`;
+                });
+            }
+            else if (breakpoint.gap == 0) {
+                a3GalleryItems.forEach((item) => {
+                    item.style.marginBottom = "0px";
+                });
             }
         }
     }
