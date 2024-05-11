@@ -47,7 +47,7 @@ function css() {
 			level: 2
 		}))
 		.pipe(rename({
-			basename: 'main',
+			basename: 'gallery',
 			suffix: '.min'
 		}))
 		.pipe(sourceMap.write('.'))
@@ -65,7 +65,7 @@ function js() {
 			presets: ['@babel/env']
 		}))
 		.pipe(uglify())
-		.pipe(concat('asrooor.min.js'))
+		.pipe(concat('gallery.min.js'))
 		.pipe(sourceMap.write('.'))
 		.pipe(size({
 			showFiles: true
